@@ -234,8 +234,8 @@ export function CardStack<T extends CardStackItem>({
       <div
         className="relative w-full"
         style={{ height: Math.max(isMobile ? 300 : 380, cardHeight + (isMobile ? 50 : 80)) }}
-        tabIndex={0}
-        onKeyDown={onKeyDown}
+        tabIndex={isMobile ? -1 : 0}
+        onKeyDown={isMobile ? undefined : onKeyDown}
       >
         {/* background wash / spotlight (unique feel) */}
         <div
