@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion, type PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -422,12 +423,14 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
       {/* image */}
       <div className="absolute inset-0">
         {item.imageSrc ? (
-          <img
+          <Image
             src={item.imageSrc}
             alt={item.title}
-            className="h-full w-full object-cover"
+            fill
+            sizes="(max-width: 480px) 90vw, (max-width: 768px) 70vw, 520px"
+            className="object-cover"
             draggable={false}
-            loading="eager"
+            priority={false}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-secondary text-sm text-muted-foreground">

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
@@ -55,10 +56,13 @@ export default function Nav() {
       >
         {/* Logo */}
         <a href="/" className="shrink-0 flex items-center">
-          <img
+          <Image
             src="/blox_logo_final.png"
             alt="blox"
+            width={100}
+            height={32}
             className="h-8 w-auto dark:invert"
+            priority
           />
         </a>
 
