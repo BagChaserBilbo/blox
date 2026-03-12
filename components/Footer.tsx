@@ -9,27 +9,27 @@ export default function Footer() {
           <span className="font-bold text-xl text-white font-display tracking-tight">
             Blox
           </span>
-          <span className="text-sm text-mid-gray">Build Bold.</span>
+          <span className="text-sm text-[#8E8E93]">Build Bold.</span>
         </div>
 
         {/* Legal links */}
         <div className="flex items-center gap-6 mb-8">
           <Link
             href="/impressum"
-            className="text-sm text-mid-gray hover:text-white transition-colors duration-200"
+            className="text-sm text-[#8E8E93] hover:text-white transition-colors duration-200"
           >
             Impressum
           </Link>
           <Link
             href="/datenschutz"
-            className="text-sm text-mid-gray hover:text-white transition-colors duration-200"
+            className="text-sm text-[#8E8E93] hover:text-white transition-colors duration-200"
           >
             Datenschutz
           </Link>
         </div>
 
         {/* Copyright */}
-        <p className="text-xs text-mid-gray">
+        <p className="text-xs text-[#8E8E93]">
           © {new Date().getFullYear()} Blox Studio. Alle Rechte vorbehalten. ·
           Wien, Österreich
         </p>

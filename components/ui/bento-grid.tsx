@@ -76,7 +76,7 @@ const BentoCard = ({
         <h3 className="text-xl font-display font-bold text-white">
           {name}
         </h3>
-        <p className="max-w-lg text-sm text-white/70">{description}</p>
+        <p className="max-w-lg text-sm text-white/80">{description}</p>
       </div>
 
       {/* CTA - always visible on mobile */}
