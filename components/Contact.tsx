@@ -54,17 +54,17 @@ export default function Contact() {
   return (
     <section
       id="kontakt"
-      className="bg-near-black py-24 px-6 scroll-mt-[52px]"
+      className="bg-near-black py-16 sm:py-24 px-5 sm:px-6 scroll-mt-[52px]"
     >
       <div className="max-w-xl mx-auto">
         {/* Header */}
         <p className="text-blox-blue text-xs uppercase tracking-widest font-semibold text-center">
           Kontakt
         </p>
-        <h2 className="text-4xl font-bold text-white mt-2 font-display tracking-tight text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mt-2 font-display tracking-tight text-center">
           Bereit für Ihr nächstes Projekt?
         </h2>
-        <p className="text-mid-gray text-lg mt-4 mb-12 leading-relaxed text-center">
+        <p className="text-mid-gray text-base sm:text-lg mt-3 sm:mt-4 mb-8 sm:mb-12 leading-relaxed text-center">
           Erzählen Sie uns von Ihrem Vorhaben — wir melden uns innerhalb von 24
           Stunden.
         </p>

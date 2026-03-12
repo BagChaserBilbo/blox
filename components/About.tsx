@@ -10,28 +10,28 @@ export default function About() {
   return (
     <section
       id="ueber-mich"
-      className="bg-off-white dark:bg-[#111111] py-24 px-6 scroll-mt-[52px] transition-colors duration-300"
+      className="bg-off-white dark:bg-[#111111] py-16 sm:py-24 px-5 sm:px-6 scroll-mt-[52px] transition-colors duration-300"
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-16 items-center">
         {/* Left: Text */}
         <ScrollReveal>
           <div>
             <p className="text-blox-blue text-xs uppercase tracking-widest font-semibold">
               Über mich
             </p>
-            <h2 className="text-4xl font-bold text-near-black dark:text-white mt-2 font-display tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-bold text-near-black dark:text-white mt-2 font-display tracking-tight leading-tight">
               Gebaut in Wien.
               <br />
               Gedacht fürs Web.
             </h2>
-            <p className="text-mid-gray dark:text-[#98989F] text-lg leading-relaxed mt-6">
+            <p className="text-mid-gray dark:text-[#98989F] text-base sm:text-lg leading-relaxed mt-4 sm:mt-6">
               Ich bin [Name] — Webdesigner aus Wien mit einem Auge für Details
               und einem Gespür für das, was online wirklich funktioniert. Meine
               Projekte verbinden klares Design mit echter Wirkung.
             </p>
 
             {/* Stats */}
-            <div className="flex gap-10 mt-10 flex-wrap">
+            <div className="flex gap-8 sm:gap-10 mt-8 sm:mt-10 flex-wrap">
               {stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="text-3xl font-bold text-near-black dark:text-white font-display">

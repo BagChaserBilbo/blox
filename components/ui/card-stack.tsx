@@ -80,13 +80,42 @@ function signedOffset(i: number, active: number, len: number, loop: boolean) {
   return Math.abs(alt) < Math.abs(raw) ? alt : raw;
 }
 
+function useResponsiveCardSize(baseW: number, baseH: number) {
+  const [size, setSize] = React.useState({ w: baseW, h: baseH });
+
+  React.useEffect(() => {
+    const update = () => {
+      const vw = window.innerWidth;
+      if (vw < 480) {
+        // Mobile: fit within viewport with padding
+        const w = Math.min(baseW, vw - 48);
+        const h = Math.round(w * (baseH / baseW));
+        setSize({ w, h });
+      } else if (vw < 768) {
+        // Tablet: slightly smaller
+        const w = Math.min(baseW, vw - 80);
+        const h = Math.round(w * (baseH / baseW));
+        setSize({ w, h });
+      } else {
+        setSize({ w: baseW, h: baseH });
+      }
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [baseW, baseH]);
+
+  return size;
+}
+
 export function CardStack<T extends CardStackItem>({
   items,
   initialIndex = 0,
   maxVisible = 7,
 
-  cardWidth = 520,
-  cardHeight = 320,
+  cardWidth: baseCardWidth = 520,
+  cardHeight: baseCardHeight = 320,
 
   overlap = 0.48,
   spreadDeg = 48,
@@ -115,6 +144,7 @@ export function CardStack<T extends CardStackItem>({
 }: CardStackProps<T>) {
   const reduceMotion = useReducedMotion();
   const len = items.length;
+  const { w: cardWidth, h: cardHeight } = useResponsiveCardSize(baseCardWidth, baseCardHeight);
 
   const [active, setActive] = React.useState(() =>
     wrapIndex(initialIndex, len),
@@ -132,10 +162,16 @@ export function CardStack<T extends CardStackItem>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
-  const maxOffset = Math.max(0, Math.floor(maxVisible / 2));
+  // On mobile, reduce visible cards and fan spread to prevent overflow
+  const isMobile = cardWidth < 480;
+  const effectiveMaxVisible = isMobile ? Math.min(maxVisible, 3) : maxVisible;
+  const effectiveSpreadDeg = isMobile ? spreadDeg * 0.5 : spreadDeg;
+  const effectiveDepthPx = isMobile ? depthPx * 0.6 : depthPx;
 
-  const cardSpacing = Math.max(10, Math.round(cardWidth * (1 - overlap)));
-  const stepDeg = maxOffset > 0 ? spreadDeg / maxOffset : 0;
+  const maxOffset = Math.max(0, Math.floor(effectiveMaxVisible / 2));
+
+  const cardSpacing = Math.max(10, Math.round(cardWidth * (1 - (isMobile ? Math.min(overlap + 0.15, 0.75) : overlap))));
+  const stepDeg = maxOffset > 0 ? effectiveSpreadDeg / maxOffset : 0;
 
   const canGoPrev = loop || active > 0;
   const canGoNext = loop || active < len - 1;
@@ -196,7 +232,7 @@ export function CardStack<T extends CardStackItem>({
       {/* Stage */}
       <div
         className="relative w-full"
-        style={{ height: Math.max(380, cardHeight + 80) }}
+        style={{ height: Math.max(isMobile ? 300 : 380, cardHeight + (isMobile ? 50 : 80)) }}
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
@@ -229,7 +265,7 @@ export function CardStack<T extends CardStackItem>({
               const rotateZ = off * stepDeg;
               const x = off * cardSpacing;
               const y = abs * 10; // subtle arc-down feel
-              const z = -abs * depthPx;
+              const z = -abs * effectiveDepthPx;
 
               const isActive = off === 0;
 
@@ -266,7 +302,8 @@ export function CardStack<T extends CardStackItem>({
                 <motion.div
                   key={item.id}
                   className={cn(
-                    "absolute bottom-0 rounded-2xl border-4 border-black/10 dark:border-white/10 overflow-hidden shadow-xl",
+                    "absolute bottom-0 rounded-2xl overflow-hidden shadow-xl",
+                    isMobile ? "border-2 border-black/10 dark:border-white/10" : "border-4 border-black/10 dark:border-white/10",
                     "will-change-transform select-none",
                     isActive
                       ? "cursor-grab active:cursor-grabbing"
@@ -403,12 +440,12 @@ function DefaultFanCard({ item }: { item: CardStackItem; active: boolean }) {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
       {/* content */}
-      <div className="relative z-10 flex h-full flex-col justify-end p-5">
-        <div className="truncate text-lg font-semibold text-white">
+      <div className="relative z-10 flex h-full flex-col justify-end p-3 sm:p-5">
+        <div className="truncate text-base sm:text-lg font-semibold text-white">
           {item.title}
         </div>
         {item.description ? (
-          <div className="mt-1 line-clamp-2 text-sm text-white/80">
+          <div className="mt-0.5 sm:mt-1 line-clamp-2 text-xs sm:text-sm text-white/80">
             {item.description}
           </div>
         ) : null}

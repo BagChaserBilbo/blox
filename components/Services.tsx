@@ -38,22 +38,22 @@ export default function Services() {
   return (
     <section
       id="leistungen"
-      className="bg-soft-blue dark:bg-[#0a1628] py-24 px-6 scroll-mt-[52px] transition-colors duration-300"
+      className="bg-soft-blue dark:bg-[#0a1628] py-16 sm:py-24 px-5 sm:px-6 scroll-mt-[52px] transition-colors duration-300"
     >
       <div className="max-w-6xl mx-auto">
         <ScrollReveal>
           <p className="text-blox-blue text-xs uppercase tracking-widest font-semibold">
             Leistungen
           </p>
-          <h2 className="text-4xl font-bold text-near-black dark:text-white mt-2 mb-12 font-display tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold text-near-black dark:text-white mt-2 mb-8 sm:mb-12 font-display tracking-tight">
             Was wir für Sie tun
           </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {services.map((service, i) => (
             <ScrollReveal key={service.title} delay={i * 0.08}>
-              <div className="bg-ice-blue dark:bg-[#0f2040] rounded-2xl p-8 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-blox-blue/10 transition-[transform,box-shadow] duration-300 h-full">
+              <div className="bg-ice-blue dark:bg-[#0f2040] rounded-2xl p-6 sm:p-8 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-blox-blue/10 transition-[transform,box-shadow] duration-300 h-full">
                 <span className="text-3xl block mb-4">{service.icon}</span>
                 <h3 className="text-lg font-semibold text-near-black dark:text-white mb-2">
                   {service.title}
