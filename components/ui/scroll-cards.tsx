@@ -25,7 +25,6 @@ const Card: FC<iCardProps> = ({
   description,
   color,
   textColor,
-  i,
   src,
 }) => {
   return (
