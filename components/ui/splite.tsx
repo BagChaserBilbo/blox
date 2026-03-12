@@ -36,11 +36,15 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
     return () => observer.disconnect()
   }, [isMobile])
 
-  // Mobile: show lightweight gradient placeholder instead of 4MB 3D scene
+  // Mobile: show logo instead of 4MB 3D scene
   if (isMobile) {
     return (
       <div className={`${className} flex items-center justify-center`}>
-        <div className="w-full h-full rounded-full bg-gradient-to-br from-ice-blue/40 via-blox-blue/20 to-mid-blue/30 dark:from-blox-blue/20 dark:via-mid-blue/10 dark:to-ice-blue/5 animate-pulse" />
+        <img
+          src="/blox_logo_final.png"
+          alt="Blox Studio"
+          className="w-3/5 h-auto dark:invert"
+        />
       </div>
     )
   }
