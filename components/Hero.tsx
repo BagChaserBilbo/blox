@@ -34,7 +34,7 @@ export default function Hero() {
           {...fadeUp(0.15)}
           className="text-4xl sm:text-5xl md:text-6xl font-bold text-near-black dark:text-white tracking-tight font-display leading-[1.05]"
         >
-          Websites, die verkaufen.
+          Websites die verkaufen.
         </motion.h1>
 
         <motion.p

@@ -1,40 +1,50 @@
 "use client";
 
+import Image from "next/image";
+import { Paintbrush, Coffee, Calculator, Dumbbell } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { CardStack, type CardStackItem } from "@/components/ui/card-stack";
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
 
-const projects: CardStackItem[] = [
+const projects = [
   {
-    id: 1,
-    title: "Maler Wagner",
+    name: "Maler Wagner",
     description: "Moderner Webauftritt für einen traditionellen Malerbetrieb",
     tag: "webdesign",
+    Icon: Paintbrush,
     imageSrc: "/projects/kevin-bhagat-zNRITe8NPqY-unsplash.jpg",
     href: "#",
+    cta: "Projekt ansehen",
+    className: "lg:col-span-2",
   },
   {
-    id: 2,
-    title: "Café Central",
+    name: "Café Central",
     description: "Einladende Online-Präsenz mit Reservierungssystem",
     tag: "branding",
+    Icon: Coffee,
     imageSrc: "/projects/tran-mau-tri-tam-h7v_38e3iGE-unsplash.jpg",
     href: "#",
+    cta: "Projekt ansehen",
+    className: "lg:col-span-1",
   },
   {
-    id: 3,
-    title: "Steuerberater Müller",
+    name: "Steuerberater Müller",
     description: "Professionelle Kanzlei-Website mit Mandantenportal",
     tag: "corporate",
+    Icon: Calculator,
     imageSrc: "/projects/carlos-muza-hpjSkU2UYSU-unsplash.jpg",
     href: "#",
+    cta: "Projekt ansehen",
+    className: "lg:col-span-1",
   },
   {
-    id: 4,
-    title: "FitLife Gym",
+    name: "FitLife Gym",
     description: "Dynamische Landingpage mit Kursplan-Integration",
     tag: "landing",
+    Icon: Dumbbell,
     imageSrc: "/projects/lee-campbell-DtDlVpy-vvQ-unsplash.jpg",
     href: "#",
+    cta: "Projekt ansehen",
+    className: "lg:col-span-2",
   },
 ];
 
@@ -55,15 +65,26 @@ export default function Projects() {
         </ScrollReveal>
       </div>
 
-      <div className="max-w-5xl mx-auto px-2 sm:px-6 pt-8 sm:pt-12 pb-16 sm:pb-24">
-        <CardStack
-          items={projects}
-          initialIndex={0}
-          autoAdvance
-          intervalMs={2000}
-          pauseOnHover
-          showDots
-        />
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 pt-8 sm:pt-12 pb-16 sm:pb-24">
+        <BentoGrid>
+          {projects.map((project, index) => (
+            <BentoCard
+              key={project.name}
+              {...project}
+              background={
+                <Image
+                  src={project.imageSrc}
+                  alt={project.name}
+                  fill
+                  quality={75}
+                  priority={index < 2}
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 100vw, 66vw"
+                />
+              }
+            />
+          ))}
+        </BentoGrid>
       </div>
     </section>
   );
